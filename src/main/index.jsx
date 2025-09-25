@@ -287,6 +287,7 @@ export default function MainPage() {
     }
 
     const resetMap = () => {
+        setShowDetailTab(false);
         setActiveStopOver(null);
         setLayerTabOpen(false);
         setActiveImage(null);
@@ -405,6 +406,7 @@ export default function MainPage() {
 
     // console.log(groupedStopOvers);
     // console.log([...new Set(state.stopovers.map(stopover => stopover['ITA_VOYAGE VARIANTS']))]);
+    // console.log(activeStopOver);
     return (
         <MainLayout>
             { isDataLoading && <div className='absolute z-[100] top-0 left-0 w-full bg-black/80 h-full flex items-center justify-center'>
@@ -755,7 +757,7 @@ export default function MainPage() {
 
 
 
-                { showDetailTab ? 
+                { (showDetailTab) ? 
                     <DetailTab 
                         setActiveStopOver={() => setActiveStopOver("")} 
                         setActiveTab={setActiveTab}
