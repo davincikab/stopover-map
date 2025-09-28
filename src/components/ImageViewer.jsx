@@ -1,9 +1,17 @@
 /* eslint-disable react/prop-types */
 import { X } from 'lucide-react';
-import {useState} from 'react'
+import {useRef, useState} from 'react'
+import useOnClickOutside from './useOutsideClick';
 
 export default function ImageViewer(props) {
     const [showModal, setShowModal] = useState(props.showImage ? false : true);
+    const imageDivRef = useRef(null);
+
+    useOnClickOutside(imageDivRef, (e) => {
+        console.log("Close");
+        setShowModal(false);
+        props.onClose();
+    });
 
     return (
         <div className='w-full relative overflow-hidden rounded-[10px] z-[70]'>
@@ -20,7 +28,7 @@ export default function ImageViewer(props) {
                     <span className="sr-only">Close modal</span>
                 </button>
 
-                <div className="relative p-2 w-auto top-16 flex items-center justify-center">
+                <div className="relative p-2 w-auto top-16 flex items-center justify-center" ref={imageDivRef}>
                     <img src={props.imageUrl} className={`h-auto max-h-[80vh] w-auto`} />
                 </div>
             </div>
